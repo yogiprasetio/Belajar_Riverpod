@@ -1,3 +1,6 @@
+import 'package:belajar_rivepod/change_page.dart';
+import 'package:belajar_rivepod/future_page.dart';
+import 'package:belajar_rivepod/weather_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,15 +36,27 @@ class MyHomePage extends ConsumerWidget {
       ),
       body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(halo),
-          Text(nomor.toString())
+          Text(nomor.toString()),
+          FlatButton(
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => FuturePage())),
+              child: Text('Future Page')),
+          FlatButton(
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ChangePage())),
+              child: Text('Change Page')),
+              FlatButton(
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AirPage())),
+              child: Text('Air Page')),
         ],
       )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(nomorStateProvider.state).state++;
+          ref.read(nomorStateProvider.state).state++;///ref adalah key uyang berasal dari widgetRef
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
