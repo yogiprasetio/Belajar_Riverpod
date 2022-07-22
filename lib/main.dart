@@ -1,4 +1,5 @@
 import 'package:belajar_rivepod/change_page.dart';
+import 'package:belajar_rivepod/detai_user_page.dart';
 import 'package:belajar_rivepod/future_page.dart';
 import 'package:belajar_rivepod/weather_ui.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ void main() {
 }
 
 final helloProvider = Provider<String>((ref) => 'Hello Riverpod');
-final nomorStateProvider = StateProvider<int>((ref) => 0);
+final nomorStateProvider = StateProvider<int>((ref) => 1);
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -48,18 +49,45 @@ class MyHomePage extends ConsumerWidget {
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ChangePage())),
               child: Text('Change Page')),
-              FlatButton(
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AirPage())),
+          FlatButton(
+              onPressed: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => AirPage())),
               child: Text('Air Page')),
+          FlatButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailUserPage(
+                              id: (nomor.toString()),
+                            )));
+              },
+              child: Text('User Page')),
         ],
       )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          ref.read(nomorStateProvider.state).state++;///ref adalah key uyang berasal dari widgetRef
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              ref.read(nomorStateProvider.state).state++;
+
+              ///ref adalah key uyang berasal dari widgetRef
+            },
+            tooltip: 'Increment',
+            child: Icon(Icons.add),
+          ),
+          SizedBox(width: 10,),
+          // FloatingActionButton(
+          //   onPressed: () {
+          //     ref.read(nomorStateProvider.state).state--;
+
+          //     ///ref adalah key uyang berasal dari widgetRef
+          //   },
+          //   tooltip: 'Increment',
+          //   child: Icon(Icons.minimize_outlined),
+          // ),
+        ],
       ),
     );
   }
